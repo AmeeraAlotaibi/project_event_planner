@@ -20,4 +20,7 @@ from events import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("events-list/", views.EventsListView.as_view()),
+    path("edit/<int:event_id>/", views.EventDetailsView.as_view()),
+    path("add/", views.AddEventView.as_view()),
+    path("search/", views.SearchEventView.as_view()),
 ]
