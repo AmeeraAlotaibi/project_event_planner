@@ -2,10 +2,16 @@ from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDe
 from .models import Event
 from .serializers import EventsListSerializer, EventDetailsSerializer, CreateEventSerializer
 from rest_framework import filters
+from rest_framework.pagination import PageNumberPagination
+from django.db.models import F
+
+
+
 # Create your views here.
 class EventsListView(ListAPIView):
     queryset = Event.objects.all()
     serializer_class = EventsListSerializer
+    pagination_class = PageNumberPagination
 
 
 class EventDetailsView(RetrieveUpdateDestroyAPIView):
@@ -24,4 +30,11 @@ class SearchEventView(ListAPIView):
     serializer_class = EventsListSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ["name"]
-    
+
+
+class FullyBookedView(ListAPIView):
+    queryset = Event.objects.filter(booked_seats= F('num_of_seats'))
+    serializer_class = EventsListSerializer
+
+
+

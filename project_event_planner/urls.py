@@ -19,8 +19,9 @@ from events import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("events-list/", views.EventsListView.as_view()),
-    path("edit/<int:event_id>/", views.EventDetailsView.as_view()),
-    path("add/", views.AddEventView.as_view()),
-    path("search/", views.SearchEventView.as_view()),
+    path("events-list/", views.EventsListView.as_view(), name="events-list"),
+    path("edit/<int:event_id>/", views.EventDetailsView.as_view(), name="edit-event"),
+    path("add/", views.AddEventView.as_view(), name="add-event"),
+    path("search/", views.SearchEventView.as_view(), name="search-event"),
+    path("fully-booked/", views.FullyBookedView.as_view(), name="fully-booked"),
 ]
